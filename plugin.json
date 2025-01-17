@@ -4,7 +4,7 @@
     "Name": "Trakt",
     "Description": "Quickly search on trakt.tv",
     "Author": "cibere",
-    "Version": "0.0.1",
+    "Version": "0.0.1a2",
     "Language": "python_v2",
     "Website": "https://github.com/author/Flow.Launcher.Plugin.Trakt",
     "IcoPath": "assets/app.png",
