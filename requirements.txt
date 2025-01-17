@@ -1,0 +1,2 @@
+git+https://github.com/cibere/flogin@0e88be14edd90fff8333ee06c7c41ab4107afbdb
+pytrakt==3.4.35

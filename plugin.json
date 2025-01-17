@@ -1,0 +1,12 @@
+{
+    "ID": "fcbc8640-bf25-40c1-b816-f0e979032dcb",
+    "ActionKeyword": "tkt",
+    "Name": "Trakt",
+    "Description": "Quickly search on trakt.tv",
+    "Author": "cibere",
+    "Version": "0.0.1",
+    "Language": "python_v2",
+    "Website": "https://github.com/author/Flow.Launcher.Plugin.Trakt",
+    "IcoPath": "assets/app.png",
+    "ExecuteFileName": "main.py"
+}
