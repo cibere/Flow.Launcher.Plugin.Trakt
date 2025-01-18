@@ -3,10 +3,12 @@ from __future__ import annotations
 import asyncio
 from typing import TYPE_CHECKING, Awaitable
 
-import trakt.sync
 import trakt.errors
+import trakt.sync
 from flogin import Query, SearchHandler
-from ..results import FetchAuthResult, AuthScriptResult
+from flogin.utils import print
+
+from ..results import AuthScriptResult, FetchAuthResult, UrlResult
 
 if TYPE_CHECKING:
     from ..plugin import TraktPlugin  # noqa: F401
@@ -24,7 +26,7 @@ class BaseHandler(SearchHandler["TraktPlugin"]):
 
     def condition(self, query: Query) -> bool:
         try:
-            return query.text.split(" ")[0] == self.prefix
+            return query.text.startswith(self.prefix)
         except IndexError:
             return False
 
@@ -35,3 +37,10 @@ class BaseHandler(SearchHandler["TraktPlugin"]):
         if isinstance(error, trakt.errors.ForbiddenException):
             return [AuthScriptResult(), FetchAuthResult()]
         super().on_error(query, error)
+
+    async def callback(self, query: Query):
+        assert self.plugin
+
+        eps = await self.search(query)
+        print(eps)
+        return [UrlResult.from_trakt_obj(obj) for obj in eps]

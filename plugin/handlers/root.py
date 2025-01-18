@@ -3,26 +3,11 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from flogin import Query, SearchHandler
-from ..results import BaseResult
+
+from ..results import RedirectResult
 
 if TYPE_CHECKING:
     from ..plugin import TraktPlugin  # noqa: F401
-
-
-class RedirectResult(BaseResult):
-    def __init__(self, keyword: str, title: str):
-        super().__init__(
-            title,
-            icon="assets/app.png",
-        )
-        self.keyword = keyword
-
-    async def callback(self):
-        assert self.plugin
-        assert self.plugin.last_query
-
-        await self.plugin.last_query.update(text=f"{self.keyword} ")
-        return False
 
 
 class RootHandler(SearchHandler["TraktPlugin"]):
@@ -31,3 +16,6 @@ class RootHandler(SearchHandler["TraktPlugin"]):
         yield RedirectResult("episode", "Search TV Episodes")
         yield RedirectResult("movie", "Search Movies")
         yield RedirectResult("person", "Search People")
+        yield RedirectResult("watchlist", "Search your watchlist")
+        yield RedirectResult("watched", "Search your watched items")
+        yield RedirectResult("collection", "Search your collection")
